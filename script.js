@@ -26,9 +26,14 @@ function addTodo() {
 
 function editTodo(index) {
     let edit = prompt("Kindly fill in your edit", allTodos[index])
-    allTodos[index] = edit
-    displayTodo();
-    updateLocalStorage();
+    if (edit) {
+        allTodos[index] = edit;
+        displayTodo();
+        updateLocalStorage();
+    }
+    else {
+        displayTodo();
+    }
 }
 
 function delTodo(index){
