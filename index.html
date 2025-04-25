@@ -4,98 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
     
-<body class="font-sans">
+<body class="font-mono m-0 p-0 ">
     
     <div class="flex justify-center min-h-fit">
-        <div class="bg-[#f1f0eec4] p-5 w-1/2 shadow-sm rounded-xl">
+        <div class="bg-[#f1f0eec4] p-5 w-full lg:w-1/2 shadow-md rounded-md mt-10">
+            <h2 class="font-bold text-center italic text-2xl ">Todo App</h2>
             <div class="px-3 py-2">
-                <ul id="showTodo">
-
-                </ul>
+                <ul id="showTodo"></ul>
             </div>
 
             <div class="">
                 <h2 class="text-base font-semibold px-5 my-2">ADD NEW</h2>
                 <div class="flex justify-around">
-                    <input type="text" placeholder="Add a new todo..." id="todo" class="rounded-lg focus:border-blue-400  px-3 py-2 w-9/12">
+                    <input type="text" placeholder="Add a new todo..." id="todo" class="rounded-lg px-3 py-2 w-9/12" onkeydown="checkInput(event)">
                     <button onclick="addTodo()" class="rounded-lg bg-blue-600 p-2 w-2/12">Add</button>
                 </div>
             </div>
-            <small  id="errorMsg" class="hidden">Input cannot be empty, kindly fill</small>
+            <small id="errorMsg" class="mx-3 mt-2 text-base lg:mx-5">Input cannot be empty, kindly fill.</small>
             
         </div>
     </div>
 
 
 
-    <script>
-        var todo = document.getElementById("todo");
-        var showTodo = document.getElementById("showTodo");
-        var errorMsg = document.getElementById("errorMsg");
-
-        var allTodos = JSON.parse(localStorage.getItem("todos")) || []
-
-function addTodo() {
-    if(todo.value==''){
-        errorMsg.style.display = 'inline'
-    }
-    else {
-        errorMsg.style.display = 'none'
-        allTodos.push(todo.value);
-        displayTodo();
-        updateLocalStorage();
-        todo.value = '';
-    }
-}
-
-function editTodo(index) {
-    let edit = prompt("Kindly fill in your edit", allTodos[index])
-    allTodos[index] = edit
-    displayTodo();
-    updateLocalStorage();
-}
-
-function delTodo(index){
-    let confirmation = confirm("Do you still want to proceed?")
-    if (confirmation) {
-        allTodos.splice(index, 1)
-        displayTodo();
-        updateLocalStorage();
-    } else {
-        displayTodo();
-    }
-}
-
-function displayTodo() {
-    showTodo.innerHTML = ''
-    for(index=0; index < allTodos.length; index++) {
-        const elements = allTodos[index];
-
-        showTodo.innerHTML += `
-        <li class="text-white bg-blue-600 rounded-lg py-4 px-10 my-3 flex items-center justify-between">
-            <p>${elements}</p>
-            <div class="flex gap-8">
-                <button onclick='editTodo(${index})'>
-                    <img src="assets/edit.svg" class="opacity-60">
-                </button>
-                <button onclick='delTodo(${index})'>
-                    <img src="assets/icons8.svg" class="opacity-60">
-                </button>
-            </div>
-        </li>
-        `
-    }
-}
-
-function updateLocalStorage() {
-    localStorage.setItem("todos", JSON.stringify(allTodos));
-}
-
-displayTodo()
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
