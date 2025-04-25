@@ -38,7 +38,7 @@ function searchTodo() {
         `
     }
     if (filteredTodos.length === 0) {
-        showTodo.innerHTML = `<p class="text-white text-center">No results found</p>`
+        showTodo.innerHTML = `<p class="text-center">No results found</p>`
     }
 }
 
