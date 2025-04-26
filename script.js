@@ -24,7 +24,7 @@ function searchTodo() {
         const elements = filteredTodos[index];
 
         showTodo.innerHTML += `
-        <li class="text-white bg-[#3674B5] rounded-lg py-4 px-10 my-3 flex items-center justify-between">
+        <li onclick='markTodo(${index})' class="text-white bg-[#3674B5] rounded-lg py-4 px-10 my-3 flex items-center justify-between">
             <p>${elements}</p>
             <div class="flex gap-8">
                 <button onclick='editTodo(${index})'>
@@ -79,16 +79,26 @@ function saveTodo() {
         modal.style.display = "none";
 }
 
-function delTodo(index){
-    let confirmation = confirm("Do you still want to proceed?")
-    if (confirmation) {
-        allTodos.splice(index, 1)
-        displayTodo();
-        updateLocalStorage();
+function delTodo(index) {
+    allTodos.splice(index, 1);
+    updateLocalStorage();
+    displayTodo();
+}
+
+function markTodo(index) {
+    let todoItem = showTodo.children[index];
+    if (todoItem.classList.contains("bg-[#3674B5]")) {
+        todoItem.classList.remove("bg-[#3674B5]");
+        todoItem.classList.add("bg-blue-400");
+        todoItem.classList.add("line-through");
     } else {
-        displayTodo();
+        todoItem.classList.remove("line-through");
+        todoItem.classList.remove("bg-blue-400");
+        todoItem.classList.add("bg-[#3674B5]");
     }
 }
+
+
 
 function displayTodo() {
     showTodo.innerHTML = ''
@@ -96,7 +106,7 @@ function displayTodo() {
         const elements = allTodos[index];
 
         showTodo.innerHTML +=`
-        <li class="text-white bg-[#3674B5] hover:bg-blue-400 rounded-lg py-3 px-10 my-3 flex items-center justify-between">
+        <li onclick='markTodo(${index})' class="text-white bg-[#3674B5] rounded-lg py-3 px-10 my-3 flex items-center justify-between">
             <p>${elements}</p>
             <div class="flex gap-8">
                 <button onclick='editTodo(${index})'>
