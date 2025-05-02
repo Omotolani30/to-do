@@ -23,14 +23,14 @@ function searchTodo() {
     for(index=0; index < filteredTodos.length; index++) {
         const elements = filteredTodos[index];
 
-        showTodo.innerHTML += `
-        <li class="text-white bg-[#3674B5] rounded-lg py-4 px-10 my-3 flex items-center justify-between">
+        showTodo.innerHTML +=`
+        <li class="text-white bg-[#3674B5] rounded-lg py-3 px-3 my-3 flex items-center justify-between gap-10 cursor-pointer hover:scale-105 lg:px-5">
             <p>${elements}</p>
-            <div class="flex gap-8">
-                <button onclick='editTodo(${index})'>
-                    <img src="assets/edit.svg" class="opacity-60">
+            <div class="flex justify-between items-center lg:gap-3">
+                <button onclick='editTodo(${index})' class="w-1/3">
+                    <img src="assets/edit.svg" class=" opacity-60">
                 </button>
-                <button onclick='delTodo(${index})'>
+                <button onclick='delTodo(${index})' class="w-1/3">
                     <img src="assets/icons8.svg" class="opacity-60">
                 </button>
             </div>
@@ -83,6 +83,7 @@ let list = document.querySelector("ul");
 list.addEventListener("click", function(e) {
     if (e.target.tagName === "LI") {
         e.target.classList.toggle("checked");
+        updateLocalStorage();
     }
 });
 
@@ -98,13 +99,13 @@ function displayTodo() {
         const elements = allTodos[index];
 
         showTodo.innerHTML +=`
-        <li class="text-white bg-[#3674B5] rounded-lg py-3 px-10 my-3 flex items-center justify-between cursor-pointer">
+        <li class="text-white bg-[#3674B5] rounded-lg py-3 px-3 my-3 flex items-center justify-between gap-10 cursor-pointer hover:scale-105 lg:px-5">
             <p>${elements}</p>
-            <div class="flex gap-8">
-                <button onclick='editTodo(${index})'>
-                    <img src="assets/edit.svg" class="opacity-60">
+            <div class="flex justify-between items-center lg:gap-3">
+                <button onclick='editTodo(${index})' class="w-1/3">
+                    <img src="assets/edit.svg" class=" opacity-60">
                 </button>
-                <button onclick='delTodo(${index})'>
+                <button onclick='delTodo(${index})' class="w-1/3">
                     <img src="assets/icons8.svg" class="opacity-60">
                 </button>
             </div>
